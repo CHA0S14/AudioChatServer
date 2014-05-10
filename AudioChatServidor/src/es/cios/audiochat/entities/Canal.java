@@ -1,4 +1,4 @@
-package es.cios.audiochat.Entities;
+package es.cios.audiochat.entities;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,6 +17,14 @@ public class Canal {
 	
 	public int getNumClient(){		
 		return clientes.size();
+	}
+	
+	public SubCanal getSubCanal(int subCanalNum){
+		return this.subCanales.get(subCanalNum);
+	}
+	
+	public List<Cliente> getClientes(){
+		return this.clientes;
 	}
 	
 }

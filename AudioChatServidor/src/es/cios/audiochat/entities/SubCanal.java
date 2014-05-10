@@ -1,4 +1,4 @@
-package es.cios.audiochat.Entities;
+package es.cios.audiochat.entities;
 
 import es.cios.audiochat.exceptions.SubCanalException;
 
