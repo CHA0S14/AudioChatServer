@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
@@ -13,12 +14,13 @@ import java.util.List;
 import es.cios.audiochat.exceptions.ClienteException;
 import es.cios.audiochat.servicios.AudioChatService;
 
-public class Cliente extends Thread {
+@SuppressWarnings("serial")
+public class Cliente extends Thread implements Serializable{
 	private int canal, subCanal = -1;
-	private Socket socket;
+	private transient Socket socket;
 	private String nombre;
 	private InetAddress inetAddress;
-	private boolean seguir = true;
+	private transient boolean seguir = true;
 
 	public void addSocket(Socket socket) {
 		this.socket = socket;
@@ -60,7 +62,7 @@ public class Cliente extends Thread {
 		} finally {
 			try {
 				if (out != null) {
-					out.close();
+					out.flush();
 				}
 			} catch (IOException e) {
 				throw new ClienteException("Error al enviar los canales: "

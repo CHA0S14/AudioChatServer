@@ -30,6 +30,7 @@ public class Conexion extends Thread {
 		try {
 			while (seguir) {
 				socket = server.accept();
+				System.out.println(socket.getPort());
 				AudioChatService.addCliente(socket);
 			}
 			server.close();

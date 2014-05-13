@@ -1,5 +1,6 @@
 package es.cios.audiochat.exceptions;
 
+@SuppressWarnings("serial")
 public class ConexionException extends RuntimeException{
 
 	public ConexionException(String message, Exception cause) {

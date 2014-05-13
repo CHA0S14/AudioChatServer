@@ -1,9 +1,11 @@
 package es.cios.audiochat.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Canal {
+@SuppressWarnings("serial")
+public class Canal implements Serializable{
 	private List<SubCanal> subCanales = new ArrayList<SubCanal>();
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
