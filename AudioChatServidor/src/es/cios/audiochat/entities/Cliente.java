@@ -1,9 +1,7 @@
 package es.cios.audiochat.entities;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -12,43 +10,57 @@ import java.net.Socket;
 import java.util.List;
 
 import es.cios.audiochat.exceptions.ClienteException;
-import es.cios.audiochat.servicios.AudioChatService;
 
 @SuppressWarnings("serial")
-public class Cliente extends Thread implements Serializable{
+public class Cliente implements Serializable{
 	private int canal, subCanal = -1;
 	private transient Socket socket;
 	private String nombre;
 	private InetAddress inetAddress;
-	private transient boolean seguir = true;
 
 	public void addSocket(Socket socket) {
 		this.socket = socket;
 		this.inetAddress = socket.getInetAddress();
+	}	
+
+	public int getCanal() {
+		return canal;
 	}
 
 	public void setCanal(int canal) {
 		this.canal = canal;
 	}
 
-	public void setSubCanal(int subCanal) {
-		this.subCanal = subCanal;
+	public int getSubCanal() {
+		return subCanal;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setSubCanal(int subCanal) {
+		this.subCanal = subCanal;
 	}
 
 	public Socket getSocket() {
 		return socket;
 	}
 
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public InetAddress getInetAddress() {
 		return inetAddress;
+	}
+
+	public void setInetAddress(InetAddress inetAddress) {
+		this.inetAddress = inetAddress;
 	}
 
 	public void enviarCanales(List<Canal> canales) throws ClienteException {
@@ -56,39 +68,9 @@ public class Cliente extends Thread implements Serializable{
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(canales);
+			out.flush();
 		} catch (IOException e) {
 			throw new ClienteException("Error al enviar los canales: "
-					+ e.getMessage(), e);
-		} finally {
-			try {
-				if (out != null) {
-					out.flush();
-				}
-			} catch (IOException e) {
-				throw new ClienteException("Error al enviar los canales: "
-						+ e.getMessage(), e);
-			}
-		}
-	}
-
-	public void parar() {
-		this.seguir = false;
-	}
-
-	@Override
-	public void run() throws ClienteException{
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
-			;
-			while (seguir) {
-				AudioChatService
-						.escribirMensaje(in.readLine(), canal, subCanal);
-			}
-			in.close();
-			socket.close();
-		} catch (IOException e) {
-			throw new ClienteException("Error al crear la conexion: "
 					+ e.getMessage(), e);
 		}
 	}
@@ -103,13 +85,6 @@ public class Cliente extends Thread implements Serializable{
 		} catch (IOException e) {
 			throw new ClienteException("Error al enviar el mensaje: "
 					+ e.getMessage(), e);
-		} finally {
-			try {
-				out.close();
-			} catch (IOException e) {
-				throw new ClienteException("Error al enviar el mensaje: "
-						+ e.getMessage(), e);
-			}
-		}
+		} 
 	}
 }

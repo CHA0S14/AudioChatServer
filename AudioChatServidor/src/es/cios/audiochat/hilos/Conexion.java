@@ -30,11 +30,9 @@ public class Conexion extends Thread {
 		try {
 			while (seguir) {
 				socket = server.accept();
-				System.out.println(socket.getPort());
 				AudioChatService.addCliente(socket);
 			}
 			server.close();
-			socket.close();
 		} catch (IOException e) {
 			throw new ConexionException("Error al crear la conexion: "
 					+ e.getMessage(), e);
