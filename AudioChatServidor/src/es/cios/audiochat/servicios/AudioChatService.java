@@ -1,7 +1,7 @@
 package es.cios.audiochat.servicios;
 
-import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class AudioChatService {
 
 	}
 
-	private static void addNombre(Nombre nombre, InetAddress inetAddress,
+	private static void addNombre(Nombre nombre, SocketAddress socketAddress,
 			int canalNum, int subCanalNum) {
 		Canal canal = canales.get(canalNum);
 		if (subCanalNum != -1) {
@@ -66,7 +66,7 @@ public class AudioChatService {
 		while (buscar) {
 			try {
 				Cliente cliente = clientes.get(cnum);
-				if (cliente.getInetAddress().equals(inetAddress)) {
+				if (cliente.getSocketAddress().equals(socketAddress)) {
 					cliente.setNombre(nombre.getNombre());
 					buscar=false;
 				}
@@ -79,11 +79,11 @@ public class AudioChatService {
 	}
 
 	public static void recibirObjeto(Object object, int canal, int subCanal,
-			InetAddress inetAddress) {
+			SocketAddress socketAddress) {
 		if (object instanceof String) {
 			escribirMensaje((String) object, canal, subCanal);
 		} else if (object instanceof Nombre) {
-			addNombre((Nombre) object, inetAddress, canal, subCanal);
+			addNombre((Nombre) object, socketAddress, canal, subCanal);
 		}
 	}
 	

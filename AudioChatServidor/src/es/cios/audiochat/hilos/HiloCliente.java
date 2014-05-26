@@ -2,8 +2,8 @@ package es.cios.audiochat.hilos;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 import es.cios.audiochat.entities.Cliente;
 import es.cios.audiochat.exceptions.ClienteException;
@@ -14,7 +14,7 @@ public class HiloCliente extends Thread{
 	private boolean seguir = true;
 	private int canal, subCanal = -1;
 	private ObjectInputStream in =null;
-	private InetAddress inetAddress;
+	private SocketAddress socketAddress;
 	
 	public HiloCliente(Cliente cliente){
 		actualizar(cliente);
@@ -30,7 +30,7 @@ public class HiloCliente extends Thread{
 		this.socket=cliente.getSocket();
 		this.canal=cliente.getCanal();
 		this.subCanal = cliente.getSubCanal();
-		this.inetAddress = cliente.getInetAddress();
+		this.socketAddress = cliente.getSocketAddress();
 	}
 
 	public void parar() {
@@ -41,7 +41,7 @@ public class HiloCliente extends Thread{
 	public void run() throws ClienteException{
 		try {				
 			while (seguir) {					
-				AudioChatService.recibirObjeto(in.readObject(), canal, subCanal, inetAddress);
+				AudioChatService.recibirObjeto(in.readObject(), canal, subCanal, socketAddress);
 			}
 			if(in!=null){
 				in.close();

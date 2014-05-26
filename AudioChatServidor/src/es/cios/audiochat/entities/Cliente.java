@@ -3,8 +3,8 @@ package es.cios.audiochat.entities;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 import es.cios.audiochat.exceptions.ClienteException;
 
@@ -13,12 +13,13 @@ public class Cliente implements Serializable{
 	private int canal, subCanal = -1;
 	private transient Socket socket;
 	private String nombre;
-	private InetAddress inetAddress;
+	private SocketAddress socketAddress;
 	private transient ObjectOutputStream out = null;
 
 	public void addSocket(Socket socket) {
 		this.socket = socket;
-		this.inetAddress = socket.getInetAddress();
+		this.socketAddress = socket.getRemoteSocketAddress();
+		System.out.println(socketAddress);
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
@@ -57,18 +58,19 @@ public class Cliente implements Serializable{
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}	
+	
+	public SocketAddress getSocketAddress() {
+		return socketAddress;
 	}
 
-	public InetAddress getInetAddress() {
-		return inetAddress;
-	}
-
-	public void setInetAddress(InetAddress inetAddress) {
-		this.inetAddress = inetAddress;
+	public void setSocketAddress(SocketAddress socketAddress) {
+		this.socketAddress = socketAddress;
 	}
 
 	public void enviarObjeto(Object object) throws ClienteException {		
-		try {			
+		try {	
+			out.reset();
 			out.writeObject(object);
 			out.flush();
 		} catch (IOException e) {
