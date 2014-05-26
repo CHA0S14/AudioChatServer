@@ -1,13 +1,10 @@
 package es.cios.audiochat.entities;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.List;
 
 import es.cios.audiochat.exceptions.ClienteException;
 
@@ -17,10 +14,17 @@ public class Cliente implements Serializable{
 	private transient Socket socket;
 	private String nombre;
 	private InetAddress inetAddress;
+	private transient ObjectOutputStream out = null;
 
 	public void addSocket(Socket socket) {
 		this.socket = socket;
 		this.inetAddress = socket.getInetAddress();
+		try {
+			out = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			throw new ClienteException("Error al crear el object out: "
+					+ e.getMessage(), e);
+		}
 	}	
 
 	public int getCanal() {
@@ -63,28 +67,13 @@ public class Cliente implements Serializable{
 		this.inetAddress = inetAddress;
 	}
 
-	public void enviarCanales(List<Canal> canales) throws ClienteException {
-		ObjectOutputStream out = null;
-		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
-			out.writeObject(canales);
+	public void enviarObjeto(Object object) throws ClienteException {		
+		try {			
+			out.writeObject(object);
 			out.flush();
 		} catch (IOException e) {
 			throw new ClienteException("Error al enviar los canales: "
 					+ e.getMessage(), e);
 		}
-	}
-
-	public void escribir(String texto) throws ClienteException{
-		BufferedWriter out = null;
-		try {
-			out = new BufferedWriter(new OutputStreamWriter(
-					socket.getOutputStream()));
-			out.write(texto);
-			out.newLine();
-		} catch (IOException e) {
-			throw new ClienteException("Error al enviar el mensaje: "
-					+ e.getMessage(), e);
-		} 
 	}
 }

@@ -31,7 +31,7 @@ public class AudioChatService {
 		cliente.addSocket(socket);
 		cliente.setCanal(0);
 		mainChanel.addCliente(cliente);		
-		cliente.enviarCanales(canales);
+		cliente.enviarObjeto(canales);
 		HiloCliente hilo = new HiloCliente(cliente);
 		hilo.start();
 	}
@@ -49,7 +49,7 @@ public class AudioChatService {
 		}
 
 		for (Cliente cliente : clientes) {
-			cliente.escribir(texto);
+			cliente.enviarObjeto(texto);
 		}
 
 	}
@@ -91,13 +91,13 @@ public class AudioChatService {
 		for (Canal canal : canales) {
 			List<Cliente> clientes = canal.getClientes();
 			for (Cliente cliente : clientes) {
-				cliente.enviarCanales(canales);
+				cliente.enviarObjeto(canales);
 			}
 			List<SubCanal> subcanales = canal.getSubCanales();
 			for (SubCanal subCanal : subcanales) {
 				clientes = subCanal.getClientes();
 				for (Cliente cliente : clientes) {
-					cliente.enviarCanales(canales);
+					cliente.enviarObjeto(canales);
 				}
 			}
 		}

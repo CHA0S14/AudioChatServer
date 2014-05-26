@@ -2,6 +2,7 @@ package es.cios.audiochat.hilos;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 import es.cios.audiochat.entities.Cliente;
@@ -12,15 +13,24 @@ public class HiloCliente extends Thread{
 	private Socket socket;
 	private boolean seguir = true;
 	private int canal, subCanal = -1;
+	private ObjectInputStream in =null;
+	private InetAddress inetAddress;
 	
 	public HiloCliente(Cliente cliente){
 		actualizar(cliente);
+		try {
+			in = new ObjectInputStream(socket.getInputStream());
+		} catch (IOException e) {
+			throw new ClienteException("Error al crear obbject in: "
+					+ e.getMessage(), e);
+		}
 	}	
 	
 	public void actualizar(Cliente cliente){
 		this.socket=cliente.getSocket();
 		this.canal=cliente.getCanal();
 		this.subCanal = cliente.getSubCanal();
+		this.inetAddress = cliente.getInetAddress();
 	}
 
 	public void parar() {
@@ -29,13 +39,13 @@ public class HiloCliente extends Thread{
 	
 	@Override
 	public void run() throws ClienteException{
-		try {
-			ObjectInputStream in = new ObjectInputStream(
-					socket.getInputStream());			
-			while (seguir) {
-				AudioChatService.recibirObjeto(in.readObject(), canal, subCanal, socket.getLocalAddress());
+		try {				
+			while (seguir) {					
+				AudioChatService.recibirObjeto(in.readObject(), canal, subCanal, inetAddress);
 			}
-			in.close();
+			if(in!=null){
+				in.close();
+			}
 			socket.close();
 		} catch (IOException e) {
 			throw new ClienteException("Error al crear la conexion: "
