@@ -7,6 +7,7 @@ import java.util.List;
 
 import es.cios.audiochat.entities.Canal;
 import es.cios.audiochat.entities.Cliente;
+import es.cios.audiochat.entities.MensajeAudio;
 import es.cios.audiochat.entities.Nombre;
 import es.cios.audiochat.entities.SubCanal;
 import es.cios.audiochat.hilos.Conexion;
@@ -36,7 +37,7 @@ public class AudioChatService {
 		hilo.start();
 	}
 
-	public static void escribirMensaje(String texto, int canalNum,
+	public static void escribirMensaje(Object texto, int canalNum,
 			int subCanalNum) {
 		Canal canal = canales.get(canalNum);
 		List<Cliente> clientes;
@@ -80,8 +81,8 @@ public class AudioChatService {
 
 	public static void recibirObjeto(Object object, int canal, int subCanal,
 			SocketAddress socketAddress) {
-		if (object instanceof String) {
-			escribirMensaje((String) object, canal, subCanal);
+		if (object instanceof String || object instanceof MensajeAudio) {
+			escribirMensaje(object, canal, subCanal);
 		} else if (object instanceof Nombre) {
 			addNombre((Nombre) object, socketAddress, canal, subCanal);
 		}
