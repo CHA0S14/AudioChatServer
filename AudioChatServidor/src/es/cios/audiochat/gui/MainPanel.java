@@ -1,4 +1,4 @@
-package es.cios.audiochat.interfaz;
+package es.cios.audiochat.gui;
 
 import javax.swing.JFrame;
 
