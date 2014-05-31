@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.cios.audiochat.entities.Canal;
+import es.cios.audiochat.entities.CanalMod;
 import es.cios.audiochat.entities.Cliente;
+import es.cios.audiochat.entities.Finalizar;
 import es.cios.audiochat.entities.MensajeAudio;
 import es.cios.audiochat.entities.Nombre;
 import es.cios.audiochat.entities.SubCanal;
@@ -31,10 +33,15 @@ public class AudioChatService {
 		cliente.setNombre("nuevo cliente");
 		cliente.addSocket(socket);
 		cliente.setCanal(0);
-		mainChanel.addCliente(cliente);		
+		cliente.setSubCanal(0);
 		cliente.enviarObjeto(canales);
 		HiloCliente hilo = new HiloCliente(cliente);
 		hilo.start();
+		
+		SubCanal prueba = new SubCanal();
+		prueba.setName("prueba");
+		mainChanel.addSubCanal(prueba);
+		prueba.addCliente(cliente);
 	}
 
 	public static void escribirMensaje(Object texto, int canalNum,
@@ -85,9 +92,51 @@ public class AudioChatService {
 			escribirMensaje(object, canal, subCanal);
 		} else if (object instanceof Nombre) {
 			addNombre((Nombre) object, socketAddress, canal, subCanal);
+		}else if (object instanceof Finalizar){
+			borrarCliente(canal,subCanal,socketAddress);
+		}else if (object instanceof CanalMod){
+			CanalMod canalMod = (CanalMod) object;
+			if(canalMod.isNuevo()){
+				cambiarNombreCanal(canalMod);
+			}
 		}
 	}
 	
+	private static void cambiarNombreCanal(CanalMod canalMod) {
+		Canal canal = canales.get(canalMod.getCanal());
+		if(canalMod.getSubCanal()>-1){
+			canal = canal.getSubCanal(canalMod.getSubCanal());
+		}
+		System.out.println(canal.getName());
+		canal.setName(canalMod.getNombre());
+		actualizar();
+	}
+
+	private static void borrarCliente(int canalNum, int subCanalNum,
+			SocketAddress socketAddress) {
+		Cliente cliente = null;
+		Canal canal = canales.get(canalNum);
+		if (subCanalNum != -1) {
+			canal = canal.getSubCanal(subCanalNum);
+		}
+		List<Cliente> clientes = canal.getClientes();
+		boolean buscar = true;
+		int cnum = 0;
+		while (buscar) {
+			try {
+				cliente = clientes.get(cnum);
+				if (cliente.getSocketAddress().equals(socketAddress)) {
+					clientes.remove(cliente);
+					buscar=false;
+				}
+				cnum++;
+			} catch (IndexOutOfBoundsException e) {
+				buscar=false;
+			}
+		}
+		actualizar();		
+	}
+
 	public static void actualizar(){
 		for (Canal canal : canales) {
 			List<Cliente> clientes = canal.getClientes();

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 import es.cios.audiochat.entities.Cliente;
+import es.cios.audiochat.entities.Finalizar;
 import es.cios.audiochat.exceptions.ClienteException;
 import es.cios.audiochat.servicios.AudioChatService;
 
@@ -40,8 +41,12 @@ public class HiloCliente extends Thread{
 	@Override
 	public void run() throws ClienteException{
 		try {				
-			while (seguir) {					
-				AudioChatService.recibirObjeto(in.readObject(), canal, subCanal, socketAddress);
+			while (seguir) {	
+				Object obj = in.readObject();
+				if(obj instanceof Finalizar){					
+					parar();
+				}
+				AudioChatService.recibirObjeto(obj, canal, subCanal, socketAddress);
 			}
 			if(in!=null){
 				in.close();

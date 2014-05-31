@@ -19,7 +19,6 @@ public class Cliente implements Serializable{
 	public void addSocket(Socket socket) {
 		this.socket = socket;
 		this.socketAddress = socket.getRemoteSocketAddress();
-		System.out.println(socketAddress);
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
