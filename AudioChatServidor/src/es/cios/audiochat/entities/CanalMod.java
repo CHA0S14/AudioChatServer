@@ -14,10 +14,9 @@ public class CanalMod implements Serializable{
 	 * @param subCanal
 	 * @param nombre
 	 */
-	public CanalMod(int canal, int subCanal, String nombre) {
+	public CanalMod(int canal, String nombre) {
 		super();
 		this.canal = canal;
-		this.subCanal = subCanal;
 		this.nombre = nombre;
 	}
 

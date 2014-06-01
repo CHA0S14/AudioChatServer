@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class Canal implements Serializable{
-	private String name;
+	protected String name;
 	private List<SubCanal> subCanales = new ArrayList<SubCanal>();
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
@@ -39,6 +39,6 @@ public class Canal implements Serializable{
 	}
 
 	public void setName(String name) {
-		this.name=name;		
+		this.name="C: "+name;		
 	}
 }

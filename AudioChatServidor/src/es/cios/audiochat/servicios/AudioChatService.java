@@ -33,15 +33,10 @@ public class AudioChatService {
 		cliente.setNombre("nuevo cliente");
 		cliente.addSocket(socket);
 		cliente.setCanal(0);
-		cliente.setSubCanal(0);
 		cliente.enviarObjeto(canales);
 		HiloCliente hilo = new HiloCliente(cliente);
 		hilo.start();
-		
-		SubCanal prueba = new SubCanal();
-		prueba.setName("prueba");
-		mainChanel.addSubCanal(prueba);
-		prueba.addCliente(cliente);
+		mainChanel.addCliente(cliente);
 	}
 
 	public static void escribirMensaje(Object texto, int canalNum,
@@ -98,10 +93,26 @@ public class AudioChatService {
 			CanalMod canalMod = (CanalMod) object;
 			if(canalMod.isNuevo()){
 				cambiarNombreCanal(canalMod);
+			}else{
+				crearCanal(canalMod);
 			}
 		}
 	}
 	
+	private static void crearCanal(CanalMod canalMod) {
+		if (canalMod.getCanal()>-1){
+			List<SubCanal> canales = AudioChatService.canales.get(canalMod.getCanal()).getSubCanales();
+			SubCanal subCanal = new SubCanal();
+			subCanal.setName(canalMod.getNombre());
+			canales.add(subCanal);
+		}else{
+			Canal canal = new Canal();
+			canal.setName(canalMod.getNombre());
+			AudioChatService.canales.add(canal);
+		}
+		actualizar();
+	}
+
 	private static void cambiarNombreCanal(CanalMod canalMod) {
 		Canal canal = canales.get(canalMod.getCanal());
 		if(canalMod.getSubCanal()>-1){
