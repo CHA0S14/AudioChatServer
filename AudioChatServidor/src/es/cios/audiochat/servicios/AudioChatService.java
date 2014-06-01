@@ -89,6 +89,8 @@ public class AudioChatService {
 			addNombre((Nombre) object, socketAddress, canal, subCanal);
 		}else if (object instanceof Finalizar){
 			borrarCliente(canal,subCanal,socketAddress);
+		}else if(object instanceof Cliente){	
+			moverCliente(canal,subCanal, socketAddress, (Cliente) object);
 		}else if (object instanceof CanalMod){
 			CanalMod canalMod = (CanalMod) object;
 			if(canalMod.isNuevo()){
@@ -99,6 +101,38 @@ public class AudioChatService {
 		}
 	}
 	
+	private static void moverCliente(int canalNum, int subCanalNum,
+			SocketAddress socketAddress, Cliente clienteMov) {
+		Cliente cliente = null;
+		Canal canal = canales.get(canalNum);
+		if (subCanalNum != -1) {
+			canal = canal.getSubCanal(subCanalNum);
+		}
+		List<Cliente> clientes = canal.getClientes();
+		boolean buscar = true;
+		int cnum = 0;
+		while (buscar) {
+			try {
+				cliente = clientes.get(cnum);
+				if (cliente.getSocketAddress().equals(socketAddress)) {					
+					canal = canales.get(clienteMov.getCanal());
+					if (clienteMov.getSubCanal() != -1) {
+						canal = canal.getSubCanal(clienteMov.getSubCanal());
+					}
+					clientes.remove(cliente);
+					cliente.setCanal(clienteMov.getCanal());
+					cliente.setSubCanal(clienteMov.getSubCanal());
+					canal.getClientes().add(cliente);
+					buscar=false;
+				}
+				cnum++;
+			} catch (IndexOutOfBoundsException e) {
+				buscar=false;
+			}
+		}
+		actualizar();
+	}
+
 	private static void crearCanal(CanalMod canalMod) {
 		if (canalMod.getCanal()>-1){
 			List<SubCanal> canales = AudioChatService.canales.get(canalMod.getCanal()).getSubCanales();
@@ -118,7 +152,6 @@ public class AudioChatService {
 		if(canalMod.getSubCanal()>-1){
 			canal = canal.getSubCanal(canalMod.getSubCanal());
 		}
-		System.out.println(canal.getName());
 		canal.setName(canalMod.getNombre());
 		actualizar();
 	}

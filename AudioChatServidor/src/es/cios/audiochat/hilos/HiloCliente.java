@@ -13,7 +13,7 @@ import es.cios.audiochat.servicios.AudioChatService;
 public class HiloCliente extends Thread{
 	private Socket socket;
 	private boolean seguir = true;
-	private int canal, subCanal = -1;
+	private Cliente cliente;
 	private ObjectInputStream in =null;
 	private SocketAddress socketAddress;
 	
@@ -29,8 +29,7 @@ public class HiloCliente extends Thread{
 	
 	public void actualizar(Cliente cliente){
 		this.socket=cliente.getSocket();
-		this.canal=cliente.getCanal();
-		this.subCanal = cliente.getSubCanal();
+		this.cliente=cliente;
 		this.socketAddress = cliente.getSocketAddress();
 	}
 
@@ -46,7 +45,7 @@ public class HiloCliente extends Thread{
 				if(obj instanceof Finalizar){					
 					parar();
 				}
-				AudioChatService.recibirObjeto(obj, canal, subCanal, socketAddress);
+				AudioChatService.recibirObjeto(obj, cliente.getCanal(), cliente.getSubCanal(), socketAddress);
 			}
 			if(in!=null){
 				in.close();
