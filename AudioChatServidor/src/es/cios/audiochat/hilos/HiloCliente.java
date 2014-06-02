@@ -17,7 +17,10 @@ public class HiloCliente extends Thread{
 	private ObjectInputStream in =null;
 	private SocketAddress socketAddress;
 	
-	public HiloCliente(Cliente cliente){
+	/**
+	 * @param cliente
+	 */
+	public HiloCliente(Cliente cliente) {
 		actualizar(cliente);
 		try {
 			in = new ObjectInputStream(socket.getInputStream());
@@ -25,18 +28,28 @@ public class HiloCliente extends Thread{
 			throw new ClienteException("Error al crear obbject in: "
 					+ e.getMessage(), e);
 		}
-	}	
-	
+	}
+
+	/**
+	 * cambia los datos dependiendo del cliente que se le pase
+	 * @param cliente
+	 */
 	public void actualizar(Cliente cliente){
 		this.socket=cliente.getSocket();
 		this.cliente=cliente;
 		this.socketAddress = cliente.getSocketAddress();
 	}
-
+	
+	/**
+	 * para el while del hilo
+	 */
 	public void parar() {
 		this.seguir = false;
 	}	
 	
+	/**
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() throws ClienteException{
 		try {				

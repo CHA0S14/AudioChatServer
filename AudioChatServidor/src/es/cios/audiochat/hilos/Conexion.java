@@ -21,10 +21,16 @@ public class Conexion extends Thread {
 		}
 	}
 
+	/**
+	 * para el while del hilo
+	 */
 	public void pararHilo() {
 		this.seguir = false;
 	}
 
+	/**
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		try {
@@ -37,5 +43,5 @@ public class Conexion extends Thread {
 			throw new ConexionException("Error al crear la conexion: "
 					+ e.getMessage(), e);
 		}
-	}
+	}	
 }

@@ -2,6 +2,11 @@ package es.cios.audiochat.entities;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Chaos
+ *
+ */
 @SuppressWarnings("serial")
 public class CanalMod implements Serializable{
 	private int canal = -1;

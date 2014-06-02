@@ -1,14 +1,25 @@
 package es.cios.audiochat.exceptions;
 
+/**
+ * 
+ * @author Chaos
+ *
+ */
 @SuppressWarnings("serial")
 public class ConexionException extends RuntimeException{
 
-	public ConexionException(String message, Exception cause) {
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public ConexionException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * @param message
+	 */
 	public ConexionException(String message) {
 		super(message);
 	}
-
 }

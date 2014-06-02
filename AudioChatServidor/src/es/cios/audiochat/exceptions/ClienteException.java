@@ -1,12 +1,25 @@
 package es.cios.audiochat.exceptions;
 
+/**
+ * 
+ * @author Chaos
+ *
+ */
 @SuppressWarnings("serial")
 public class ClienteException extends RuntimeException{
-	public ClienteException(String mensaje) {
-		super(mensaje);
+
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public ClienteException(String message, Throwable cause) {
+		super(message, cause);
 	}
-	
-	public ClienteException(String mensaje, Exception e) {
-		super(mensaje,e);
+
+	/**
+	 * @param message
+	 */
+	public ClienteException(String message) {
+		super(message);
 	}
 }
