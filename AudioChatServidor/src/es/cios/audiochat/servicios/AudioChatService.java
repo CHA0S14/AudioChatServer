@@ -125,7 +125,7 @@ public class AudioChatService {
 			if(canalMod.isNuevo()){
 				cambiarNombreCanal(canalMod);
 			}else{
-				crearCanal(canalMod);
+				crearCanal(canal,subCanal,canalMod,socketAddress);
 			}
 		}
 	}
@@ -155,11 +155,16 @@ public class AudioChatService {
 					canal = canales.get(clienteMov.getCanal());
 					if (clienteMov.getSubCanal() != -1) {
 						canal = canal.getSubCanal(clienteMov.getSubCanal());
-					}					
+					}							
+					
 					cliente.setCanal(clienteMov.getCanal());
 					cliente.setSubCanal(clienteMov.getSubCanal());
+					
+					boolean valeSub = clienteMov.getSubCanal()>subCanalNum;
+					boolean vale = clienteMov.getCanal()>canalNum;
+					
 					canal.getClientes().add(cliente);
-					eliminarCanalMover(cliente, canal2, canalNum);
+					eliminarCanalMover(cliente, canal2, canalNum, valeSub, vale);					
 					buscar=false;
 				}
 				cnum++;
@@ -176,14 +181,21 @@ public class AudioChatService {
 	 * @param canal canal que se va a comprobar
 	 * @param subCanalNum numero del subCanal que se  va a comprobar
 	 */
-	private static void eliminarCanalMover(Cliente cliente, Canal canal, int subCanalNum) {
+	private static void eliminarCanalMover(Cliente cliente, Canal canal, int canalNum, boolean valeSub, boolean vale) {
 		if(canal.getNumClient()==0 && canal.getNumSubCanal()==0){
 			if(canal instanceof SubCanal){
-				canales.get(subCanalNum).getSubCanales().remove(canal);
-				eliminarCanalMover(cliente, canales.get(subCanalNum), subCanalNum);
+				canales.get(canalNum).getSubCanales().remove(canal);
+				if(vale){
+					cliente.setSubCanal(cliente.getSubCanal()-1);
+				}
+				eliminarCanalMover(cliente, canales.get(canalNum), canalNum, valeSub, vale);
 			}else if (canal instanceof Canal){
-				if(!canal.getName().equals("C: Main chanel"))
+				if(!canal.getName().equals("C: Main chanel")){
 					canales.remove(canal);
+					if(vale){
+						cliente.setCanal(cliente.getCanal()-1);
+					}
+				}
 			}
 		}
 	}
@@ -192,21 +204,23 @@ public class AudioChatService {
 	 * crea un canal o un subcanal dependiendo de la variable canal del objeto canalMod
 	 * @param canalMod objeto con el canal en el cual se quiere crear el subcanal si es un subcanal lo que quieres crear, ademas tiene el nombre del canal en cuestion
 	 */
-	private static void crearCanal(CanalMod canalMod) {
-		Canal canal;
+	private static void crearCanal(int canalNum, int subCanalNum, CanalMod canalMod, SocketAddress socketAddress) {
+		Cliente clienteMov = new Cliente();
 		if (canalMod.getCanal()>-1){
 			List<SubCanal> canales = AudioChatService.canales.get(canalMod.getCanal()).getSubCanales();
 			SubCanal subCanal = new SubCanal();
 			subCanal.setName(canalMod.getNombre());
 			canales.add(subCanal);
-			canal = subCanal;
+			clienteMov.setCanal(canalMod.getCanal());
+			clienteMov.setSubCanal(canales.size()-1);
 		}else{
 			Canal canal2 = new Canal();
 			canal2.setName(canalMod.getNombre());
 			AudioChatService.canales.add(canal2);
-			canal = canal2;			
+			clienteMov.setCanal(canales.size()-1);
+			clienteMov.setSubCanal(-1);
 		}
-		//TODO cambiar el cliente del canal desde el que creo esto a este canal
+		moverCliente(canalNum, subCanalNum, socketAddress, clienteMov);
 		actualizar();
 	}
 
@@ -244,6 +258,7 @@ public class AudioChatService {
 				cliente = clientes.get(cnum);
 				if (cliente.getSocketAddress().equals(socketAddress)) {
 					clientes.remove(cliente);
+					eliminarCanalMover(cliente, canal, subCanalNum, false, false);					
 					buscar=false;
 				}
 				cnum++;
