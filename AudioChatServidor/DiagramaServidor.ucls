@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="es.cios.audiochat.gui" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/gui" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="109" y="153"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="es.cios.audiochat.hilos" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/hilos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="607" y="581"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="es.cios.audiochat.exceptions" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/exceptions" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="222" y="446"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="es.cios.audiochat.entities" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1070" y="30"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="es.cios.audiochat.servicios" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/servicios" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="425" y="41"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="6" language="java" name="es.cios.audiochat.entities.CanalMod" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/CanalMod.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1391" y="530"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="es.cios.audiochat.entities.MensajeAudio" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/MensajeAudio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1151" y="199"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="es.cios.audiochat.entities.Canal" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/Canal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="938" y="235"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="es.cios.audiochat.entities.SubCanal" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/SubCanal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="929" y="518"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="es.cios.audiochat.entities.Nombre" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/Nombre.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1339" y="172"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="es.cios.audiochat.entities.Finalizar" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/Finalizar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1353" y="299"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="es.cios.audiochat.entities.Cliente" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/entities/Cliente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1174" y="510"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="es.cios.audiochat.exceptions.ClienteException" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/exceptions/ClienteException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="238" y="565"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="es.cios.audiochat.exceptions.SubCanalException" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/exceptions/SubCanalException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="212" y="686"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="es.cios.audiochat.exceptions.ConexionException" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/exceptions/ConexionException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="221" y="799"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="es.cios.audiochat.gui.MainPanel" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/gui/MainPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="109" y="243"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="es.cios.audiochat.hilos.Conexion" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/hilos/Conexion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="520" y="738"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="es.cios.audiochat.hilos.HiloCliente" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/hilos/HiloCliente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="715" y="756"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="es.cios.audiochat.servicios.AudioChatService" project="AudioChatServidor" 
+    file="/AudioChatServidor/src/es/cios/audiochat/servicios/AudioChatService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="414" y="242"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="20">    
+    <bendpoint x="679" y="365"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="21" name="canales"/>      
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="822" y="296"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="24" name="clientes"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="27" name="conn"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="30" name="mainChanel"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="33" name="cliente"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="36" name="subCanales"/>      
+      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
